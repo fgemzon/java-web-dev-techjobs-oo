@@ -1,8 +1,10 @@
 package org.launchcode.techjobs_oo;
-
+/*
+import java.lang.reflect.Field;
+*/
 import java.util.Objects;
 
-public class Job {
+public class Job extends JobField {
 
     private int id;
     private static int nextId = 1;
@@ -18,11 +20,11 @@ public class Job {
     //  the 'id' field.
 
     public Job(){
-        id = nextId;
+        this.id = nextId;
         nextId++;
     }
 
-    public Job(String name,Employer employer, Location location, PositionType positionType, CoreCompetency coreCompetency){
+    public Job(String name, Employer employer, Location location, PositionType positionType, CoreCompetency coreCompetency){
         this();
         this.name = name;
         this.employer = employer;
@@ -34,21 +36,71 @@ public class Job {
     // TODO: Add custom equals and hashCode methods. Consider two Job objects "equal" when their id fields
     //  match.
 
+   /* @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-       // if (!super.equals(object)) return false;
+        if (!(o instanceof Job)) return false;
         Job job = (Job) o;
-        return id == job.id && java.util.Objects.equals(name, job.name) && java.util.Objects.equals(employer, job.employer) && java.util.Objects.equals(location, job.location) && java.util.Objects.equals(positionType, job.positionType) && java.util.Objects.equals(coreCompetency, job.coreCompetency);
-    }
+        return id == job.id;
+    }*/
 
+/*    @Override
     public int hashCode() {
-        return java.util.Objects.hash(super.hashCode(), id, name, employer, location, positionType, coreCompetency);
+        return Objects.hash(id);
+    }*/
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if(o==null || getClass() != o.getClass()) return false;
+        Job job = (Job) o;
+        return id == job.id;
     }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 
     // TODO: Add getters for each field EXCEPT nextId. Add setters for each field EXCEPT nextID
     //  and id.
+    @Override
+    public String toString(){
+/*        if(this.employer.getValue().equals("") && this.name.equals("") && this.location.equals("")
+                && this.positionType.equals("")&&this.coreCompetency.equals("")) {
+                     return "OOPS! This job does not seem to exist.";
+        }*/
+
+        if(this.name.equals("")){
+            name ="Data not Available";
+        }
+        if(this.employer.getValue().equals("") || this.employer.getValue() == null){
+            employer.setValue("Data not Available");
+        }
+
+        if(this.location.getValue().equals("") || this.location.getValue() == null){
+            location.setValue("Data not Available");
+        }
+
+        if(this.positionType.getValue().equals("") || this.positionType.getValue() == null){
+            positionType.setValue("Data not Available");
+        }
+
+        if(this.coreCompetency.getValue().equals("") || this.coreCompetency.getValue() == null){
+            coreCompetency.setValue("Data not Available");
+        }
+
+        return "\nId: " + this.id +
+                "\nName: " + name +
+                "\nEmployer: " + employer +
+                "\nLocation: " + location+
+                "\nPosition Type: " + positionType +
+                "\nCore Competency: " + coreCompetency;
+
+
+    }
+
+
 
 
     public int getId() {
