@@ -91,6 +91,7 @@ public class JobTestsTest {
 
     }
 
+
 /*    @Test
     public void bonusJobTest(){
         Job job = new Job("", new Employer(""), new Location(""), new PositionType(""), new CoreCompetency(""));
